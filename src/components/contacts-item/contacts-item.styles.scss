@@ -1,0 +1,35 @@
+.item-container{
+    width: 100%;
+    display: flex;
+    min-height: 100px;
+    padding: 15px 0;
+    font-size: 20px;
+    align-items: center;
+
+    .item__data{
+        width: 80%;
+        padding-right: 15px;
+        display: flex;
+        align-items: center;
+
+        .item__data_name{
+            width: 50%;
+            margin-right: 10px;
+        }
+
+        .item__data_phoneNumber{
+            width: 50%;
+        }
+    }
+
+    .addBtn{
+        cursor: pointer;
+        width: 10%;
+    }
+
+    .removeBtn{
+        cursor: pointer;
+        width: 10%;
+    }
+
+}

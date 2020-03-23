@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React from "react";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import { Route, Redirect } from "react-router-dom";
+
+import HomePage from "./pages/homepage/homepage.component";
+
+import ContactsPage from "./pages/contacts/contacts.component";
+
+import {connect} from "react-redux";
+
+import { selectIsLogged } from "./redux/isLogged/isLogged.selectors";
+
+import { createStructuredSelector } from "reselect";
+
+class App extends React.Component{
+ 
+  render() {
+    const {isLogged} = this.props;
+    return( 
+    <div>
+      <Route exact path="/" render={() => isLogged ? (<Redirect to="/contacts" />) : (<HomePage />)}/>
+      <Route exact path="/contacts" render={() => !isLogged ? (<Redirect to="/" />) : (<ContactsPage />)} />
+     
     </div>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = createStructuredSelector({
+  isLogged: selectIsLogged
+});
+
+
+export default connect(mapStateToProps)(App);
